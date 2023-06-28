@@ -7,13 +7,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class DatabaseConfig
-{
+public class DatabaseConfig {
     private BasicDataSource basicDataSource;
 
     @Bean
-    public BasicDataSource dataSource()
-    {
+    public BasicDataSource dataSource() {
         return basicDataSource;
     }
 

@@ -8,13 +8,11 @@ public abstract class MySqlDaoBase
 {
     private DataSource dataSource;
 
-    public MySqlDaoBase(DataSource dataSource)
-    {
+    public MySqlDaoBase(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-    protected Connection getConnection() throws SQLException
-    {
+    protected Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
 }
