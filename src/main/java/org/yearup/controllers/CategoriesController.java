@@ -1,7 +1,9 @@
 package org.yearup.controllers;
 
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.yearup.data.CategoryDao;
@@ -9,6 +11,7 @@ import org.yearup.data.ProductDao;
 import org.yearup.models.Category;
 import org.yearup.models.Product;
 
+import java.nio.file.NotDirectoryException;
 import java.util.List;
 
 @RestController
@@ -30,9 +33,15 @@ public class CategoriesController {
     }
 
     @GetMapping("/{id}")
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.OK)
     public Category getById(@PathVariable int id) {
-        return categoryDao.getById(id);
+        Category category = categoryDao.getById(id);
+        if (category != null) {
+            return categoryDao.getById(id);
+        } else if (category == null) {
+           return null;
+        }
+        return category;
     }
 
 //     the url to return all products in category 1 would look like this
